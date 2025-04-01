@@ -1,0 +1,65 @@
+body {
+  background-color: #000;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.MuiContainer-root {
+  background: rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.MuiContainer-root:hover {
+  transform: scale(1);
+}
+
+.MuiTypography-root {
+  color: #fff;
+}
+
+.MuiTextField-root {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.MuiInputBase-input {
+  color: white !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.MuiTextField-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #00d4ff !important;
+}
+
+.MuiButton-contained {
+  background: linear-gradient(45deg, #ff4e50, #fc913a);
+  color: white;
+  transition: background 0.3s ease-in-out;
+}
+
+.MuiButton-contained:hover {
+  background: linear-gradient(45deg, #fc913a, #ff4e50);
+}
+
+.MuiLink-root {
+  color: #00d4ff;
+  transition: color 0.3s ease-in-out;
+}
+
+.MuiLink-root:hover {
+  color: #ff4e50;
+}
