@@ -25,7 +25,7 @@ const settings = [
   // { name: "Profile", path: "/profile" },
   { name: "Your Quizzes", path: "/quizzes" },
   { name: "Dashboard", path: "/dashboard" },
-  { name: "Logout", path: "/logout" },
+  { name: "Logout", path: "/signin" },
 ];
 
 function ResponsiveAppBar() {
