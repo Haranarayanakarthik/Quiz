@@ -5,15 +5,13 @@ import {
   Grid,
   Card,
   CardContent,
-  Button,
   List,
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
-const dashboard = () => {
+const Dashboard = () => {
   const quizzes = [
     {
       id: 1,
@@ -36,7 +34,7 @@ const dashboard = () => {
   ];
 
   return (
-    <Box sx={{ p: 4 }}>
+    <Box sx={{ p: 4, bgcolor: "black", minHeight: "100vh", color: "white" }}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -65,7 +63,7 @@ const dashboard = () => {
             >
               <Card
                 sx={{
-                  bgcolor: "#1976D2",
+                  bgcolor: "#333",
                   color: "white",
                   borderRadius: 3,
                   textAlign: "center",
@@ -84,14 +82,6 @@ const dashboard = () => {
         ))}
       </Grid>
 
-      {/* Generate AI Quiz Button */}
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-      >
-      </motion.div>
-
       {/* Recent AI-Generated Quizzes */}
       <Typography variant="h5" sx={{ mt: 5, fontWeight: "bold" }}>
         Recent AI-Generated Quizzes
@@ -103,15 +93,23 @@ const dashboard = () => {
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
           >
             <ListItem
-              button
-              sx={{ bgcolor: "#F5F5F5", my: 1, borderRadius: 2, boxShadow: 1 }}
+              sx={{
+                bgcolor: "#222",
+                my: 1,
+                borderRadius: 2,
+                boxShadow: 1,
+                color: "white",
+              }}
             >
               <ListItemText
                 primary={<Typography variant="h6">{quiz.title}</Typography>}
-                secondary={`Difficulty: ${quiz.difficulty} | Attempts: ${quiz.attempts}`}
+                secondary={
+                  <Typography variant="body2" sx={{ color: "gray" }}>
+                    Difficulty: {quiz.difficulty} | Attempts: {quiz.attempts}
+                  </Typography>
+                }
               />
             </ListItem>
           </motion.div>
@@ -121,4 +119,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
