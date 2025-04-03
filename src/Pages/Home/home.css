@@ -15,8 +15,8 @@
   background-image: url("./janko-ferlic-sfL_QOnmy00-unsplash.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.5; /* Set the desired opacity for the background image */
-  z-index: -1; /* Keeps the background behind the content */
+  opacity: 0.5; 
+  z-index: -1; 
 }
 
 .home {
