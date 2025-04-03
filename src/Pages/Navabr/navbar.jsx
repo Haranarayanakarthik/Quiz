@@ -120,7 +120,7 @@ function ResponsiveAppBar() {
                   component={Link}
                   to={page.path}
                 >
-                  <Typography sx={{ textAlign: "center", color: "#FFD700" }}>
+                  <Typography sx={{ textAlign: "center", color: "#ff0000" }}>
                     {page.name}
                   </Typography>
                 </MenuItem>
