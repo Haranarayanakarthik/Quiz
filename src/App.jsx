@@ -34,8 +34,8 @@ const App = () => {
 
 const styles = {
   mainContent: {
-    minHeight: "calc(100vh - 80px)", // Subtracting the navbar height to make the footer stick to the bottom
-    paddingBottom: "0px", // Ensures content does not overlap with footer
+    minHeight: "calc(100vh - 80px)", 
+    paddingBottom: "0px", 
   },
 };
 
