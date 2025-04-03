@@ -14,6 +14,7 @@ import Contact from "./Pages/contact.jsx";
 const App = () => {
   return (
     <>
+    {/* Routes for this project */}
       <Nclearavbar />
       <div style={styles.mainContent}>
         <Routes>
