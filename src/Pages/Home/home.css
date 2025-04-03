@@ -64,8 +64,7 @@ p {
 
 /* Glowing neon effect when focused */
 .input-box:focus {
-  border-color: #ffeb3b; 
-  box-shadow: 0 0 15px #ffeb3b, 0 0 30px #ffeb3b; 
+  border-color: #ffeb3b;
   transform: scale(1.02);
 }
 
