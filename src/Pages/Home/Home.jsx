@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import "./home.css";
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
     const file = event.target.files[0];
     if (file) {
       console.log("Selected file:", file);
-      // Optional: You can handle the file here (e.g., preview or upload)
+      // Optional: handle file here
     }
   };
 
@@ -31,32 +32,31 @@ const Home = () => {
             Get started with a simple prompt to create your Quiz.
           </p>
 
-          <textarea
-            placeholder="Enter your prompt"
-            className="input-box"
-            value={prompt}
-            onChange={handleChange}
-            onClick={handleFileClick}
-            rows={4}
-            style={{
-              width: "100%",
-              resize: "none",
-              whiteSpace: "pre-wrap",
-              padding: "10px",
-              fontSize: "1.5rem",
-              cursor: "pointer",
-            }}
-          />
+          <div className="textarea-wrapper">
+            <textarea
+              placeholder="Enter your prompt"
+              className="input-box"
+              value={prompt}
+              onChange={handleChange}
+              rows={4}
+            />
+            <IconButton
+              color="primary"
+              onClick={handleFileClick}
+              className="add-btn-inside"
+            >
+              <AddIcon />
+            </IconButton>
+          </div>
 
           <input
             type="file"
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg,file/pdf,file/word"
             ref={fileInputRef}
             onChange={handleFileChange}
             hidden
           />
 
-          <br />
           <br />
           <Button variant="contained" color="primary" className="generate-btn">
             Generate
