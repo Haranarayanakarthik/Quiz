@@ -51,7 +51,7 @@ const Home = () => {
 
           <input
             type="file"
-            accept="image/png, image/jpeg,file/pdf,file/word"
+            accept="*/*"
             ref={fileInputRef}
             onChange={handleFileChange}
             hidden
