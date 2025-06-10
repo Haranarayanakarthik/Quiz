@@ -56,7 +56,6 @@ const Home = () => {
             onChange={handleFileChange}
             hidden
           />
-
           <br />
           <Button variant="contained" color="primary" className="generate-btn">
             Generate
