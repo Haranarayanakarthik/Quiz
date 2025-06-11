@@ -1,10 +1,16 @@
 import React, { useState, useRef } from "react";
-import { Button, Box, IconButton } from "@mui/material";
+import { Button, Box, IconButton, CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import "./home.css";
+
+// Initialize Gemini API
+const genAI = new GoogleGenerativeAI("AIzaSyAsnHL0KOrnmuP4uP9Uc4w4gG0a4lpIZOU");
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleChange = (event) => {
@@ -19,7 +25,25 @@ const Home = () => {
     const file = event.target.files[0];
     if (file) {
       console.log("Selected file:", file);
-      // Optional: handle file here
+    }
+  };
+
+  const handleGenerate = async () => {
+    if (!prompt.trim()) return;
+
+    setLoading(true);
+    setResponse("");
+
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContent(prompt);
+      const text = await result.response.text();
+      setResponse(text);
+    } catch (error) {
+      console.error("Error generating content:", error);
+      setResponse("Something went wrong while generating the response.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,9 +81,27 @@ const Home = () => {
             hidden
           />
           <br />
-          <Button variant="contained" color="primary" className="generate-btn">
-            Generate
+
+          <Button
+            variant="contained"
+            color="primary"
+            className="generate-btn"
+            onClick={handleGenerate}
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Generate"
+            )}
           </Button>
+
+          {response && (
+            <div className="output-box">
+              <h3>AI Response:</h3>
+              <p>{response}</p>
+            </div>
+          )}
         </div>
       </Box>
     </div>
