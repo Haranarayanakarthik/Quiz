@@ -1,11 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button, Box, IconButton, CircularProgress } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import "./home.css";
-
-// Initialize Gemini API
-const genAI = new GoogleGenerativeAI("AIzaSyAsnHL0KOrnmuP4uP9Uc4w4gG0a4lpIZOU");
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");
@@ -25,6 +21,7 @@ const Home = () => {
     const file = event.target.files[0];
     if (file) {
       console.log("Selected file:", file);
+      // You can handle file upload or processing here if needed
     }
   };
 
@@ -35,13 +32,41 @@ const Home = () => {
     setResponse("");
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(prompt);
-      const text = await result.response.text();
-      setResponse(text);
+      const cohereResponse = await fetch("https://api.cohere.ai/v1/generate", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_COHERE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "command", // Use the appropriate model
+          prompt: prompt,
+          max_tokens: 300,
+          temperature: 0.7,
+          k: 0,
+          stop_sequences: [],
+          return_likelihoods: "NONE",
+        }),
+      });
+
+      const data = await cohereResponse.json();
+      console.log("Cohere API Response:", data);
+
+      if (data.generations && data.generations.length > 0) {
+        // Clean and format the response before setting it
+        const rawText = data.generations[0].text;
+        // Normalize line breaks and trim
+        const neatText = rawText
+          .replace(/\r\n/g, "\n") // Normalize Windows CRLF to LF
+          .replace(/\n{2,}/g, "\n\n") // Collapse multiple blank lines
+          .trim();
+        setResponse(neatText);
+      } else {
+        setResponse("❌ Still no content. Try a simpler or different prompt.");
+      }
     } catch (error) {
-      console.error("Error generating content:", error);
-      setResponse("Something went wrong while generating the response.");
+      console.error("Cohere API Error:", error);
+      setResponse("❌ API Error: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -68,6 +93,7 @@ const Home = () => {
               color="primary"
               onClick={handleFileClick}
               className="add-btn-inside"
+              aria-label="upload file"
             >
               <AddIcon />
             </IconButton>
@@ -99,7 +125,11 @@ const Home = () => {
           {response && (
             <div className="output-box">
               <h3>AI Response:</h3>
-              <p>{response}</p>
+              <div className="formatted-response">
+                {response.split("\n\n").map((paragraph, idx) => (
+                  <p key={idx}>{paragraph.trim()}</p>
+                ))}
+              </div>
             </div>
           )}
         </div>
