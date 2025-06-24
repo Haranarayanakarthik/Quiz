@@ -15,7 +15,7 @@
     "@google/genai": "^1.4.0",
     "@google/generative-ai": "^0.24.1",
     "@mui/icons-material": "^7.0.0",
-    "@mui/material": "^7.0.0",
+    "@mui/material": "^7.1.2",
     "@mui/styles": "^6.4.9",
     "framer-motion": "^12.6.2",
     "react": "^19.0.0",
